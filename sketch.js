@@ -4,8 +4,8 @@ function setup(){
 
     var A = new Matrix(2,2);
     var B = new Matrix(2,2);
-    console.log(A);
-    console.log(B);
+    //console.log(A);
+    //console.log(B);
 
     Matrix.add(A,B);
 }

@@ -17,10 +17,26 @@ class Matrix {
         }
     }
 
+    map(func) {
+        //seleciona araay por linha
+        this.data =  this.data.map((arr,indexI) =>{
+            //seleciona o elemento
+            return arr.map((num,indexJ) =>{
+                return func(num,indexI,indexJ);
+            })
+        })
+    }
+
     static add(A, B){
-        //!A.rows == B.rows &&
-        if( A.cols == B.rows){
+
+        if(A.cols == B.rows){
             var matrix = new Matrix(A.rows, A.cols);
+            console.log(A.data)
+            console.log(B.data)
+            matrix.map((elm,indexI,indexJ)=>{
+                return A.data[indexI][indexJ] + B.data[indexI][indexJ];
+            });
+            console.log(matrix.data)
 
         }else{
             console.log("Erro!: O numero de Colunas da Primeira deve ser igual ao numero de linha da segunda");
