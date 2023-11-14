@@ -17,29 +17,81 @@ class Matrix {
         }
     }
 
+    static map(A,func) {
+        let matrix = new Matrix(A.rows, B.rows);
+        //seleciona Array por linha
+        matrix.data =  matrix.data.map((arr,indexI) =>{
+            //seleciona o elemento
+            return arr.map((num,indexJ) =>{
+                return func(num,indexI,indexJ);
+            })
+        })
+
+        return matrix;
+    }
+
     map(func) {
-        //seleciona araay por linha
+        //seleciona Array por linha
         this.data =  this.data.map((arr,indexI) =>{
             //seleciona o elemento
             return arr.map((num,indexJ) =>{
                 return func(num,indexI,indexJ);
             })
         })
+
+        return this;
     }
 
+    print(){
+        console.table(this.data);
+    }
+
+    randomize(){
+        this.map( (elm,i,j) =>{
+            return Math.random()*2 - 1;
+        });
+    }
+
+    static arrayToMatrix(arr){
+        let matrix = new Matrix(arr.length,1);
+        
+        matrix.map((elm,i,j)=>{
+            return arr[i];
+        })
+
+        return matrix;
+    }
+
+    
     static add(A, B){
+        var matrix = new Matrix(A.rows, A.cols);
+        
+        matrix.map((elm,indexI,indexJ)=>{
+            return A.data[indexI][indexJ] + B.data[indexI][indexJ];
+        });
 
-        if(A.cols == B.rows){
-            var matrix = new Matrix(A.rows, A.cols);
-            console.log(A.data)
-            console.log(B.data)
-            matrix.map((elm,indexI,indexJ)=>{
-                return A.data[indexI][indexJ] + B.data[indexI][indexJ];
-            });
-            console.log(matrix.data)
+        return matrix;
 
-        }else{
-            console.log("Erro!: O numero de Colunas da Primeira deve ser igual ao numero de linha da segunda");
-        }  
+
+      
+    }
+
+    static multiply(A, B){
+        var matrix = new Matrix(A.rows, B.cols);
+        
+        matrix.map((num,indexI, indexJ) => {
+            let sum = 0;
+            for(let k = 0 ; k < A.cols; k++){
+               let elem1 = A.data[indexI][k];
+               let elem2 = B.data[k][indexJ];
+               sum += elem1 * elem2;
+                
+            }
+
+            return sum;
+        })
+
+        return matrix;
+
     }
 }
