@@ -1,13 +1,12 @@
 function setup(){
     createCanvas(500,500);
-    background(155);
-
-    var A = new Matrix(2,2);
-    var B = new Matrix(2,2);
-    //console.log(A);
-    //console.log(B);
-
-    Matrix.add(A,B);
+    background(126);
+ 
+    var rn =  new RedeNeural(1,3,1);
+    var arr = [3,4];
+    rn.feedforward(arr);
+    
+    
 }
 
 function draw(){
